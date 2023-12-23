@@ -1,0 +1,77 @@
+* {
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.navbar {
+    width: 100vw;
+    height: 0;
+    display: flex;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+}
+
+.hamb {
+    width: 2vmax;
+    transform: rotate(90deg);
+    font: 900 2.2vmax "Roboto";
+    padding-left: 50px;
+    position: absolute;
+    top: -25px;
+    left: 0px;
+    display: flex;
+    cursor: pointer;
+    color: black;
+}
+
+.hamb:hover {
+    color: tomato;
+    /* text-shadow: 2px 2px 10px tomato; */
+    transition: all 0.01s;
+}
+
+.nav-item {
+    width: 25%;
+    box-sizing: border-box;
+    display: flex;
+    transition: all 0.5s;
+    position: relative;
+    background-color: white;
+}
+
+.nav-child1,
+.nav-child2,
+.nav-child3,
+.nav-child4 {
+    width: 100%;
+    text-align: center;
+    height: fit-content;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-child1,
+.nav-child2_1,
+.nav-child2_2,
+.nav-child3_1,
+.nav-child3_2,
+.nav-child4_1,
+.nav-child4_2,
+.nav-child4_3 {
+    display: none;
+    position: relative;
+    top: -40px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-child2_1:hover,
+.nav-child2_2:hover,
+.nav-child3_1:hover,
+.nav-child3_2:hover,
+.nav-child4_1:hover,
+.nav-child4_2:hover,
+.nav-child4_3:hover {
+    color: tomato;
+}

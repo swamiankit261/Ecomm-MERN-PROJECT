@@ -1,0 +1,191 @@
+@keyframes expandNav {
+    0% {
+        height: 0vh;
+    }
+
+    100% {
+        height: 100vh;
+    }
+}
+
+@keyframes collapseNav {
+    0% {
+        height: 100vh;
+    }
+
+    100% {
+        height: 0vh;
+    }
+}
+
+.animateF1 {
+    animation: expandNav 0.5s 0s 1 alternate forwards;
+}
+
+.animate_up1 {
+    animation: collapseNav 0.5s linear 0s 1 alternate forwards;
+}
+
+.animateF2 {
+    animation: expandNav 0.7s linear 0s 1 alternate forwards;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
+.animate_up2 {
+    animation: collapseNav 0.7s linear 0s 1 alternate forwards;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
+.animateF3 {
+    animation: expandNav 0.9s linear 0s 1 alternate forwards;
+}
+
+.animate_up3 {
+    animation: collapseNav 0.9s linear 0s 1 alternate forwards;
+}
+
+.animateF4 {
+    animation: expandNav 1.2s linear 0s 1 alternate forwards;
+}
+
+.animate_up4 {
+    animation: collapseNav 1.2s linear 0s 1 alternate forwards;
+}
+
+.animateF1 .nav-child1,
+.animateF2 .nav-child2_1,
+.animateF2 .nav-child2_2,
+.animateF3 .nav-child3_1,
+.animateF3 .nav-child3_2,
+.animateF4 .nav-child4_1,
+.animateF4 .nav-child4_2,
+.animateF4 .nav-child4_3 {
+    display: block;
+}
+
+.animate_up1 .nav-child1,
+.animate_up2 .nav-child2_1,
+.animate_up2 .nav-child2_2,
+.animate_up3 .nav-child3_1,
+.animate_up3 .nav-child3_2,
+.animate_up4 .nav-child4_1,
+.animate_up4 .nav-child4_2,
+.animate_up4 .nav-child4_3 {
+    display: none;
+}
+
+.nav-child1 {
+
+    animation: textdawn 0.9s linear 0s 1 alternate forwards;
+}
+
+.nav-child2_1 {
+    animation: textdawn 0.9s linear 0s 1 alternate forwards;
+}
+
+.nav-child2_2 {
+    animation: textdawn 1.3s linear 0s 1 alternate forwards;
+}
+
+.nav-child3_1 {
+    animation: textdawn 1s linear 0s 1 alternate forwards;
+}
+
+.nav-child3_2 {
+    animation: textdawn 0.9s linear 0s 1 alternate forwards;
+}
+
+.nav-child4_1 {
+    animation: textdawn 2s linear 0s 1 alternate forwards;
+}
+
+
+.nav-child4_2 {
+    animation: textdawn 1.8s linear 0s 1 alternate forwards;
+}
+
+.nav-child4_3 {
+    animation: textdawn 2.2s linear 0s 1 alternate forwards;
+}
+
+@keyframes textdawn {
+    0% {
+        top: -40vh;
+    }
+
+    100% {
+        top: 50vh;
+    }
+}
+
+
+.animateF1 .ham_1 {
+    transform: rotate(45deg);
+    transition: all .5s;
+    position: relative;
+    top: 0px;
+    left: 10px;
+}
+
+.animateF1 .ham_2 {
+    display: none;
+}
+
+.animateF1 .ham_3 {
+    transform: rotate(-45deg);
+    transition: all .5s;
+}
+
+.animate_up1 .ham_1 {
+    transition: all .5s;
+}
+
+.animate_up1 .ham_2 {
+    display: block;
+    transition: all .5s;
+}
+
+.animate_up1 .ham_3 {
+    transition: all .5s;
+}
+
+@media screen and (max-width: 768px) {
+
+    @keyframes expandNav {
+        0% {
+            height: 0vh;
+        }
+
+        100% {
+            height: 50vh;
+        }
+    }
+
+    @keyframes collapseNav {
+        0% {
+            height: 50vh;
+        }
+
+        100% {
+            height: 0vh;
+        }
+    }
+
+    @keyframes textdawn {
+        0% {
+            top: -10vh;
+        }
+
+        100% {
+            top: 25vh;
+        }
+    }
+
+    .nav-child1,
+    .nav-child2,
+    .nav-child3,
+    .nav-child4 {
+        flex-direction: column;
+    }
+
+}

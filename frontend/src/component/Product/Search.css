@@ -1,0 +1,43 @@
+.searchBox {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(215, 209, 209);
+    position: fixed;
+    top: 0px;
+}
+
+.searchBox input[type="text"] {
+    box-shadow: 0 0 15px -8px black;
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 1vmax 2vmax;
+    width: 50%;
+    outline: none;
+    border-radius: 10px 0px 0px 10px;
+    font: 300 1.1vmax cursive;
+    box-sizing: border-box;
+    height: 8%;
+}
+
+.searchBox input[type="submit"] {
+    width: 10%;
+    height: 8%;
+    border-radius: 0px 10px 10px 0px;
+    box-shadow: 0 0 15px -8px black;
+    background-color: tomato;
+    border: none;
+    padding: 1vmax;
+    font: 300 1.1vmax "Roboto";
+    cursor: pointer;
+    color: white;
+    transition: all .5s;
+}
+
+.searchBox>input[type="submit"]:hover {
+    background-color: rgb(35, 35, 238);
+}
