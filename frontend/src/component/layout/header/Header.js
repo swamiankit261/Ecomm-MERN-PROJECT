@@ -45,7 +45,7 @@ const NavbarComponent = () => {
                     <div className="nav-child4">
                         <Link className="nav-child4_1" to={"/search"} onClick={startAnimation}>< IoSearchSharp fontSize={25} /></Link>
                         <Link className="nav-child4_2" to={"/"} onClick={startAnimation}><FiShoppingBag fontSize={25} /></Link>
-                        <Link className="nav-child4_3" to={"/"} onClick={startAnimation}><BiSolidUserRectangle fontSize={25} /></Link>
+                        <Link className="nav-child4_3" to={"/login"} onClick={startAnimation}><BiSolidUserRectangle fontSize={25} /></Link>
                     </div>
                 </div>
             </div>
