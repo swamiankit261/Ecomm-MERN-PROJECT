@@ -1,11 +1,20 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./LoginSignUp.css";
 import Loader from '../layout/Loader/Loader';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoMailOutline } from 'react-icons/io5';
 import { BiFace, BiLock, BiLockOpen } from 'react-icons/bi';
+import { useDispatch, useSelector } from "react-redux";
+import { login, register, clearError } from '../../actions/userAction';
+import { useAlert } from "react-alert"
 
 const LoginSignUpPage = () => {
+
+    const dispatch = useDispatch();
+    const alert = useAlert();
+    const navigate = useNavigate();
+
+    const { error, isAuthenticated, loading } = useSelector((state) => state.user);
 
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
@@ -23,12 +32,13 @@ const LoginSignUpPage = () => {
     const registerTab = useRef(null);
     const switcherTab = useRef(null);
 
-    const loginSubmit = () => {
-        console.log("Login Form submited");
+    const loginSubmit = (e) => {
+        e.preventDefault();
+        dispatch(login(loginEmail, loginPassword))
     };
 
     const registerSubmit = (e) => {
-        e.preventdefault();
+        e.preventDefault();
 
         const myFrom = new FormData();
 
@@ -36,7 +46,8 @@ const LoginSignUpPage = () => {
         myFrom.set("email", email);
         myFrom.set("password", password);
         myFrom.set("avatar", avatar);
-        console.log("signUp Form submited");
+
+        dispatch(register(myFrom));
     }
 
     const registerDataChange = (e) => {
@@ -48,13 +59,24 @@ const LoginSignUpPage = () => {
                     setAvatarPreview(reader.result);
                     setAvatar(reader.result);
                 }
+            };
 
-                reader.readAsDataURL(e.target.files[0]);
-            }
+            reader.readAsDataURL(e.target.files[0]);
         } else {
             setuser({ ...user, [e.target.name]: e.target.value });
         }
-    }
+    };
+
+
+    useEffect(() => {
+        if (error) {
+            alert.error(error);
+            dispatch(clearError());
+        }
+        if (isAuthenticated) {
+            navigate("/account")
+        }
+    }, [dispatch, error, alert, isAuthenticated, navigate])
 
     const switchTabs = (e, tab) => {
         if (tab === "login") {
@@ -75,53 +97,53 @@ const LoginSignUpPage = () => {
     }
     return (
         <>
-            {/* <Loader /> */}
-            <>
-                <div className='LoginSignUpContainer'>
-                    <div className='LoginSignUpBox'>
-                        <div>
-                            <div className='login_signUP_toggle'>
-                                <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
-                                <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
+            {loading ? <Loader /> :
+                <>
+                    <div className='LoginSignUpContainer'>
+                        <div className='LoginSignUpBox'>
+                            <div>
+                                <div className='login_signUP_toggle'>
+                                    <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
+                                    <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
+                                </div>
+                                <button ref={switcherTab}></button>
                             </div>
-                            <button ref={switcherTab}></button>
+                            <form className='loginForm' ref={loginTab} onSubmit={loginSubmit}>
+                                <div className='loginEmail'>
+                                    <IoMailOutline />
+                                    <input type="email" placeholder='Email' value={loginEmail} onChange={e => setLoginEmail(e.target.value)} autoComplete='on' />
+                                </div>
+                                <div className='loginPassword'>
+                                    <BiLockOpen />
+                                    <input type="password" autoComplete='on' value={loginPassword} onChange={e => setLoginPassword(e.target.value)} />
+                                </div>
+                                <Link to="/password/forgot">FORGET PASSWORD ?</Link>
+                                <input className='loginBtn' type="submit" value={"Login"} />
+
+                            </form>
+                            <form className='signUpForm' ref={registerTab} encType='multipart/form-data' onSubmit={registerSubmit}>
+                                <div className='signUpName'>
+                                    <BiFace />
+                                    <input type="text" placeholder='Name' required name='name' value={name} onChange={registerDataChange} />
+                                </div>
+                                <div className='signUpEmail'>
+                                    <IoMailOutline />
+                                    <input type="email" placeholder='Email' required name="email" value={email} onChange={registerDataChange} />
+                                </div>
+                                <div className='signUpPassword'>
+                                    <BiLock />
+                                    <input type="password" placeholder='Passwprd' required autoComplete='on' name='password' value={password} onChange={registerDataChange} />
+                                </div>
+                                <div id='registerImage'>
+                                    <img src={avatarPreview} alt="Avatar Preview" />
+                                    <input type="file" name='avatar' accept='image/*' onChange={registerDataChange} />
+                                </div>
+                                <input type="submit" value={"Register"} className='signUpBtn' />
+
+                            </form>
                         </div>
-                        <form className='loginForm' ref={loginTab} onSubmit={loginSubmit}>
-                            <div className='loginEmail'>
-                                <IoMailOutline />
-                                <input type="email" placeholder='Email' required value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
-                            </div>
-                            <div className='loginPassword'>
-                                <BiLockOpen />
-                                <input type="password" required value={loginPassword} onChange={e => setLoginPassword(e.target.value)} />
-                            </div>
-                            <Link to="/password/forgot">FORGET PASSWORD ?</Link>
-                            <input className='loginBtn' type="submit" value={"Login"} />
-
-                        </form>
-                        <form className='signUpForm' ref={registerTab} encType='multipart/from-data' onSubmit={registerSubmit}>
-                            <div className='signUpName'>
-                                <BiFace />
-                                <input type="text" placeholder='Name' required name='name' value={name} onChange={registerDataChange} />
-                            </div>
-                            <div className='signUpEmail'>
-                                <IoMailOutline />
-                                <input type="email" placeholder='Email' required name="email" value={email} onChange={registerDataChange} />
-                            </div>
-                            <div className='signUpPassword'>
-                                <BiLock />
-                                <input type="password" placeholder='Passwprd' required name='password' value={password} onChange={registerDataChange} />
-                            </div>
-                            <div id='registerImage'>
-                                <img src={avatarPreview} alt="Avatar Preview" />
-                                <input type="file" name='avatar' accept='image/*' onChange={registerDataChange} />
-                            </div>
-                            <input type="submit" value={"Register"} className='signUpBtn' />
-
-                        </form>
                     </div>
-                </div>
-            </>
+                </>}
         </>
     )
 }

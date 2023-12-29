@@ -5,7 +5,7 @@ import Metadata from '../layout/Metadata';
 
 const Search = () => {
     const [keyWord, setKeyWord] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const searchSubmitHandler = (e) => {
         e.preventDefault();

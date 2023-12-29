@@ -6,19 +6,33 @@ const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const { validationResult } = require("express-validator");
 const { stringify } = require("querystring");
+const cloudinary = require("cloudinary");
 
 
 // Register a user
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-    const { name, email, password } = req.body;
+
+    const { name, email, password, avatar } = req.body;
+
+    const existEmail = await User.findOne({ email });
+
+    if (existEmail) {
+        return next(new ErrorHandler("You can't use invalid or duplicate emails.", 409))
+    }
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, { folder: "Avatars", width: 250, CropMode: "scale" });
+
+    // const myCloud = await cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
+    //     { folder: "Avatars" },
+    //     function (error, result) { console.log("sdjhfksd"); });
+
 
     const user = await User.create({
         name,
         email,
         password,
         avatar: {
-            public_id: "this is a sample id",
-            url: "profilePicUrl",
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
         },
     });
 
