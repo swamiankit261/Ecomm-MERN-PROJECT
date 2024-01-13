@@ -9,6 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useAlert } from 'react-alert';
 import { logout } from "../../../actions/userAction";
 import { useDispatch } from 'react-redux';
+import Backdrop from '@mui/material/Backdrop';
 
 function UserOptions({ user }) {
     const [open, setOpen] = useState(false);
@@ -48,6 +49,11 @@ function UserOptions({ user }) {
 
     return (
         <>
+            <Backdrop
+                sx={{ color: '#fff' }}
+                style={{ zIndex: 1 }}
+                open={open}
+            ></Backdrop>
             <SpeedDial
                 className='speeddial'
                 style={{ zIndex: 1 }}

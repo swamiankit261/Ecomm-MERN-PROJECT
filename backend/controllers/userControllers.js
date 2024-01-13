@@ -119,7 +119,6 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
 });
 
 // Reset password 
-
 exports.resetPassword = catchAsyncError(async (req, res, next) => {
     // Creating token hash
 
