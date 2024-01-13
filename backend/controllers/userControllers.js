@@ -19,7 +19,7 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
     if (existEmail) {
         return next(new ErrorHandler("You can't use invalid or duplicate emails.", 409))
     }
-    const myCloud = await cloudinary.v2.uploader.upload(avatar, { folder: "Avatars", width: 250, CropMode: "scale" });
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, { folder: "Avatars", width: 200, CropMode: "scale" });
 
     // const myCloud = await cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
     //     { folder: "Avatars" },
@@ -189,8 +189,22 @@ exports.updateUserProfile = catchAsyncError(async (req, res, next) => {
         email: req.body.email,
     };
 
+    if (req.body.avatar !== "") {
+        const user = await User.findById(req.user._id);
 
-    // we will add cloudinary later
+        const imageId = user.avatar.public_id;
+
+        await cloudinary.v2.uploader.destroy(imageId);
+
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, { folder: "Avatars", width: 200, CropMode: "scale" });
+
+        newUserData.avatar = {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
+        };
+
+    }
+
 
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new: true,

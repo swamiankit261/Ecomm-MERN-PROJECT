@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./UpdateProfile.css";
 import Loader from '../layout/Loader/Loader';
 import { IoMailOutline } from 'react-icons/io5';
-import { BiFace, BiLock, BiLockOpen } from 'react-icons/bi';
+import { BiFace } from 'react-icons/bi';
 import { useDispatch, useSelector } from "react-redux";
 import { clearError, loadUser } from '../../actions/userAction';
 import { updateProfile } from '../../actions/updateProfileAction';
@@ -83,17 +83,17 @@ const UpdateProfile = () => {
                             <form className='updateProfileForm' encType='multipart/form-data' onSubmit={updateProfileSubmit}>
                                 <div className='updateProfileName'>
                                     <BiFace />
-                                    <input type="text" placeholder='Name' required name='name' value={name} onChange={updateProfileDataChange} />
+                                    <input type="text" placeholder='Name' required name='name' value={name} onChange={(e) => setName(e.target.value)} />
                                 </div>
                                 <div className='updateProfileEmail'>
                                     <IoMailOutline />
-                                    <input type="email" placeholder='Email' required name="email" value={email} onChange={updateProfileDataChange} />
+                                    <input type="email" placeholder='Email' required name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                 </div>
                                 <div id='updateProfileImage'>
                                     <img src={avatarPreview} alt="Avatar Preview" />
                                     <input type="file" name='avatar' accept='image/*' onChange={updateProfileDataChange} />
                                 </div>
-                                <input type="submit" value={"updateProfile"} className='updateProfileBtn' />
+                                <input type="submit" value={"update"} className='updateProfileBtn' />
 
                             </form>
                         </div>
