@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { useSelector, useDispatch } from "react-redux";
 import { clearError, getProductDetails } from '../../actions/productAction';
@@ -9,14 +9,30 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader.js";
 import { useAlert } from "react-alert";
 import Metadata from '../layout/Metadata.js';
+import { addItemsToCart } from '../../actions/cartActions.js';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const alert = useAlert()
+    const alert = useAlert();
+
+    const [quantity, setQuantity] = useState(1);
+
 
     const { product, loading, error } = useSelector(state => state.productDetails);
 
+    const QuantityHandler = (e) => {
+
+        if (e === "increase" && product.stock > quantity) {
+            setQuantity(e => e += 1);
+        } else if (e === "decrease" && quantity > 1) {
+            setQuantity(e => e -= 1);
+        }
+    };
+    const addToCartHandler = () => {
+        dispatch(addItemsToCart(id, quantity));
+        alert.success("Item added successfully");
+    };
     useEffect(() => {
         if (error) {
             alert.error(error);
@@ -63,11 +79,11 @@ const ProductDetails = () => {
                                 <h1>{`₹ ${price}`}</h1>
                                 <div className='detailsBlock-3-1'>
                                     <div className='detailsBlock-3-1-1'>
-                                        <button>-</button>
-                                        <input type="Number" value={1} readOnly />
-                                        <button>+</button>
+                                        <button onClick={() => QuantityHandler("decrease")}>-</button>
+                                        <input type="Number" value={quantity} readOnly />
+                                        <button onClick={() => QuantityHandler("increase")}>+</button>
                                     </div>
-                                    <button>Add to Cart</button>
+                                    <button onClick={addToCartHandler}>Add to Cart</button>
                                 </div>
                                 <p>
                                     Status={""}

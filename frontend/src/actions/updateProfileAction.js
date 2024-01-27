@@ -53,12 +53,12 @@ export const forgotPassword = (email) => async (dispatch) => {
 };
 
 //reset password
-export const resetUserPassword = (token, passwords) => (dispatch) => {
+export const resetUserPassword = (token, passwords) => async (dispatch) => {
     try {
         dispatch({ type: RESET_PASSWORD_REQUEST });
         const config = { headers: { 'Content-Type': 'application/json' } };
 
-        const { data } = axios.put(`/api/v1/password/reset/${token}`, passwords, config);
+        const { data } = await axios.put(`/api/v1/password/reset/${token}`, passwords, config);
 
         dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data.success });
     } catch (error) {
