@@ -10,6 +10,8 @@ import Search from "./component/Product/Search.js";
 import Profile from "./component/user/Profile.js";
 import UpdateProfile from "./component/user/UpdateProfile.js";
 import UpdatePassword from "./component/user/UpdatePassword.js";
+import ForgotPassword from "./component/user/ForgotPassword.js";
+import ResetPassword from "./component/user/ResetPassword.js";
 import { useEffect } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';
@@ -42,9 +44,12 @@ function App() {
         <Route path='/products/:keyword' element={<Products />} />
         <Route path='/search' element={<Search />} />
         <Route path='/login' element={<LoginSignUpPage />} />
+
         <Route exact path='/account' element={<ProtectedRoute component={Profile} />} />
         <Route exact path='/me/update' element={<ProtectedRoute component={UpdateProfile} />} />
         <Route exact path='/password/update' element={<ProtectedRoute component={UpdatePassword} />} />
+        <Route exact path='/password/forgot' element={<ForgotPassword />} />
+        <Route exact path='/password/reset/:token' element={<ResetPassword />} />
       </Routes>
       <Footer />
     </>

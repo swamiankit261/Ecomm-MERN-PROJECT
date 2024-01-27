@@ -59,7 +59,7 @@ const UpdatePassword = () => {
                     <div className='updatePasswordContainer'>
                         <div className='updatePasswordBox'>
                             <h2 className='updatePasswordHeading'>Update Password</h2>
-                            <form className='updatePasswordForm' encType='multipart/form-data' onSubmit={updatePasswordSubmit}>
+                            <form className='updatePasswordForm' onSubmit={updatePasswordSubmit}>
                                 <div className='updatePassword'>
                                     <MdOutlineVpnKey />
                                     <input type="password" autoComplete='on' value={oldPassword} onChange={e => setOldPassword(e.target.value)} placeholder='Enter your oldPassword' />
