@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './navbar-layout.css';
 import './navbar-animations.css';
 import { Link } from 'react-router-dom';
-import { AiOutlineAmazon } from "react-icons/ai";
 import { MdLocalGroceryStore } from "react-icons/md";
 import { IoSearchSharp } from "react-icons/io5";
 import { FiShoppingBag } from "react-icons/fi";
@@ -44,7 +43,7 @@ const NavbarComponent = () => {
                 <div className={`nav-item ${isAnimated ? 'animateF4' : `${isAnimated2 ? "animate_up4" : ""}`}`} id="nav_4">
                     <div className="nav-child4">
                         <Link className="nav-child4_1" to={"/search"} onClick={startAnimation}>< IoSearchSharp fontSize={25} /></Link>
-                        <Link className="nav-child4_2" to={"/"} onClick={startAnimation}><FiShoppingBag fontSize={25} /></Link>
+                        <Link className="nav-child4_2" to={"/cart"} onClick={startAnimation}><FiShoppingBag fontSize={25} /></Link>
                         <Link className="nav-child4_3" to={"/login"} onClick={startAnimation}><BiSolidUserRectangle fontSize={25} /></Link>
                     </div>
                 </div>

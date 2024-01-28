@@ -7,8 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAlert } from 'react-alert';
+import { RiShoppingCart2Fill } from "react-icons/ri";
 import { logout } from "../../../actions/userAction";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Backdrop from '@mui/material/Backdrop';
 
 function UserOptions({ user }) {
@@ -17,6 +18,8 @@ function UserOptions({ user }) {
     const navigate = useNavigate();
     const alert = useAlert();
     const dispatch = useDispatch();
+
+    const { cartItems } = useSelector((item) => item.cart);
 
     const { avatar, role } = user;
 
@@ -29,6 +32,10 @@ function UserOptions({ user }) {
 
     const account = () => {
         navigate("/account")
+    };
+
+    const cart = () => {
+        navigate("/cart")
     }
 
     const logoutUser = () => {
@@ -39,6 +46,7 @@ function UserOptions({ user }) {
     const options = [
         { icon: <ListAltIcon />, name: "Orders", func: orders },
         { icon: <PersonOutlineIcon />, name: "Profile", func: account },
+        { icon: <RiShoppingCart2Fill color={cartItems.length > 0 ? "tomato" : "unset"} />, name: `Cart(${cartItems.length})`, func: cart },
         { icon: <LogoutIcon />, name: "Logout", func: logoutUser },
     ]
 
@@ -66,7 +74,7 @@ function UserOptions({ user }) {
             >
 
                 {options.map((item) => (
-                    <SpeedDialAction key={item.name} icon={item.icon} tooltipTitle={item.name} onClick={item.func} />
+                    <SpeedDialAction key={item.name} icon={item.icon} tooltipTitle={item.name} onClick={item.func} tooltipOpen={window.innerWidth <= 600 ? true : false} />
                 ))}
             </SpeedDial>
 
