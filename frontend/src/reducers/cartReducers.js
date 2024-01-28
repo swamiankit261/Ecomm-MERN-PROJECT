@@ -3,26 +3,26 @@ import { ADD_TO_CART } from "../constants/cartConstants";
 export const addToCart = (state = { cartItems: [] }, action) => {
     switch (action.type) {
         case ADD_TO_CART:
-            
+
             const items = action.payload;
 
-            const isItemExists = state.cartItems.find(item => item.product===items.product);
+            const isItemExists = state.cartItems.find(item => item.product === items.product);
 
-            if(isItemExists) {
+            if (isItemExists) {
                 return {
-                 ...state,
-                    cartItems: state.cartItems.map(item => item.product===items.product? items : item)
+                    ...state,
+                    cartItems: state.cartItems.map(item => item.product === isItemExists.product ? items : item)
                 }
-            }else {
+            } else {
                 return {
-                  ...state,
+                    ...state,
                     cartItems: [
-                      ...state.cartItems,
+                        ...state.cartItems,
                         items
                     ]
                 }
             }
-    
+
         default:
             return state;
     }
