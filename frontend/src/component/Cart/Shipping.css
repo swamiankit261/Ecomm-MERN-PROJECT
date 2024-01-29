@@ -1,0 +1,120 @@
+.shippingContainer {
+    width: 100vw;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.shippingBox {
+    width: 25vw;
+    height: 90vh;
+    background-color: white;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.shippingHeading {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.664);
+    width: 50%;
+    font: 400 1.3vmax "Roboto";
+    padding: 1.3vmax;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+    margin: auto;
+}
+
+.shippingForm {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2vmax;
+    margin: auto;
+    transition: all .5s;
+}
+
+.shippingForm>div {
+    width: 100%;
+    display: flex;
+    margin: 5px auto;
+    align-items: center;
+}
+
+.shippingForm>div>input,
+.shippingForm>div>select {
+    width: 100%;
+    padding: 1vmax 4vmax;
+    padding-right: 1vmax;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    font: 300 0.9vmax cursive;
+}
+
+.shippingForm>div>input:focus,
+.shippingForm>div>select:focus {
+    border: 1px solid rgba(0, 0, 0, 0.502);
+}
+
+.shippingForm>div>svg {
+    position: relative;
+    transform: translateX(2.5vmax);
+    font-size: 1.6vmax;
+    color: rgba(0, 0, 0, 0.623);
+}
+
+.shippingBtn {
+    width: 100%;
+    border: none;
+    background-color: tomato;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    font: 300 1vmax "Roboto";
+    padding: 1vmax;
+    margin: 2vmax;
+    transition: all .5s;
+}
+
+.shippingBtn:hover {
+    background-color: rgb(252, 54, 54);
+}
+
+@media screen and (max-width: 768px) {
+    .shippingBox {
+        width: 100vw;
+        height: 95vh;
+    }
+
+    .shippingHeading {
+        font: 400 6vw "Roboto";
+        padding: 5vw;
+    }
+
+    .shippingForm {
+        padding: 11vw;
+    }
+
+    .shippingForm>div>input,
+    .shippingForm>div>select {
+        font: 300 4vw cursive;
+        padding: 2vmax 4vmax 2vmax 8vmax;
+    }
+
+    .shippingForm>div>svg {
+        font-size: 5vw;
+        transform: translateX(6vw);
+    }
+
+    .shippingBtn {
+        font: 300 4vw "Roboto";
+        padding: 2vw;
+        margin-left: 4.5vw;
+        margin-right: 0;
+    }
+}

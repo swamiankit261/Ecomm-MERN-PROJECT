@@ -13,6 +13,7 @@ import UpdatePassword from "./component/user/UpdatePassword.js";
 import ForgotPassword from "./component/user/ForgotPassword.js";
 import ResetPassword from "./component/user/ResetPassword.js";
 import Cart from "./component/Cart/Cart.js";
+import Shipping from "./component/Cart/Shipping.js";
 import { useEffect } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';
@@ -52,6 +53,7 @@ function App() {
         <Route exact path='/password/forgot' element={<ForgotPassword />} />
         <Route exact path='/password/reset/:token' element={<ResetPassword />} />
         <Route exact path='/cart' element={<Cart />} />
+        <Route exact path="/login/shipping" element={<ProtectedRoute component={Shipping} />} />
       </Routes>
       <Footer />
     </>

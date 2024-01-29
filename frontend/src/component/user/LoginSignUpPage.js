@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./LoginSignUp.css";
 import Loader from '../layout/Loader/Loader';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoMailOutline } from 'react-icons/io5';
 import { BiFace, BiLock, BiLockOpen } from 'react-icons/bi';
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ const LoginSignUpPage = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const { error, isAuthenticated, loading } = useSelector((state) => state.user);
 
@@ -67,6 +68,7 @@ const LoginSignUpPage = () => {
         }
     };
 
+    const redirectParam = location.search ? location.search.split("=")[1] : "/account";
 
     useEffect(() => {
         if (error) {
@@ -74,9 +76,11 @@ const LoginSignUpPage = () => {
             dispatch(clearError());
         }
         if (isAuthenticated) {
-            navigate("/account")
+            // Modify redirectParam to remove "/login" if present
+            const cleanedRedirectParam = redirectParam.replace('/login', '');
+            navigate(cleanedRedirectParam)
         }
-    }, [dispatch, error, alert, isAuthenticated, navigate])
+    }, [dispatch, error, alert, isAuthenticated, navigate, redirectParam]);
 
     const switchTabs = (e, tab) => {
         if (tab === "login") {
