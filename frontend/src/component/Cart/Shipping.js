@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./Shipping.css";
 import { useSelector, useDispatch } from 'react-redux';
+import CheckoutSteps from "../Cart/CheckoutSteps";
 import { saveShippingInfo } from '../../actions/cartActions';
 import { Country, State } from "country-state-city";
 import { useAlert } from 'react-alert';
@@ -11,25 +12,43 @@ import { TbMapPinCode } from "react-icons/tb";
 import { MdPhone } from "react-icons/md";
 import { MdOutlineTransferWithinAStation } from "react-icons/md";
 import Metadata from '../layout/Metadata';
+import { useNavigate } from 'react-router-dom';
 
 const Shipping = () => {
 
     const dispatch = useDispatch();
     const alert = useAlert();
+    const navigate = useNavigate();
     const shippingInfo = useSelector((state) => state.cart.shippingInfo);
+
 
     const [address, setAddress] = useState(shippingInfo.address);
     const [city, setCity] = useState(shippingInfo.city);
     const [state, setState] = useState(shippingInfo.state);
-    const [country, setCountry] = useState(shippingInfo.Country);
+    const [country, setCountry] = useState(shippingInfo.country);
     const [pincode, setPincode] = useState(shippingInfo.pincode);
     const [phone, setPhone] = useState(shippingInfo.phone);
 
-    const shippingSubmit = (e) => { };
+    const shippingSubmit = (e) => {
+        e.preventDefault();
+
+        if (!address || !city || !state || !country || !pincode || !phone) {
+            alert.show('Please fill all the fields');
+            return;
+        } else if (!phone.match(/^[0-9]{10}$/g)) {
+            alert.error('Please enter a valid phone number');
+            return;
+        }
+        else {
+            dispatch(saveShippingInfo({ address, city, state, country, pincode, phone }));
+            navigate("/order/confirm");
+        }
+    };
 
     return (
         <>
             <Metadata title={"Shipping Details"} />
+            <CheckoutSteps activeStep={0} />
             <div className='shippingContainer'>
                 <div className='shippingBox'>
                     <h2 className='shippingHeading'>Shipping Details</h2>
@@ -85,6 +104,7 @@ const Shipping = () => {
                         </div>
                         <div>
                             <BsGlobeAmericas />
+                            {console.log("ffffff", country)}
                             <select
                                 name='country'
                                 value={country}

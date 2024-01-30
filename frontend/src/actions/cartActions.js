@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_TO_CART,REMOVE_FROM_CART, SAVE_SHIPPING_INFORMATION } from "../constants/cartConstants";
+import { ADD_TO_CART, REMOVE_FROM_CART, SAVE_SHIPPING_INFORMATION } from "../constants/cartConstants";
 
 
 //add to cart
@@ -49,8 +49,8 @@ export const saveShippingInfo = (shippingInformation) => async (dispatch, getSta
             payload: shippingInformation
         });
 
-        const updatedCartItems = getState().cart.cartItems;
-        localStorage.setItem("shippingInfo", JSON.stringify(updatedCartItems));
+        // const updatedCartItems = getState().shippingInfo;
+        localStorage.setItem("shippingInfo", JSON.stringify(shippingInformation));
     } catch (error) {
         console.error("Error fetching product data:", error);
     }
