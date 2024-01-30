@@ -2,13 +2,12 @@ import React from 'react'
 import "./ConfirmOrder.css";
 import CheckoutSteps from './CheckoutSteps';
 import Metadata from '../layout/Metadata';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
 const ConfirmOrder = () => {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
@@ -65,7 +64,7 @@ const ConfirmOrder = () => {
                         <div className='confirmCartItemsContainer'>
                             {cartItems && cartItems.map((item) => (
                                 <div key={item.product}>
-                                    <img src={item.image} alt={`Image of ${item.name}`} />
+                                    <img src={item.image} alt={`product`} />
                                     <Link to={`/product/${item.product}`} >{item.name}</Link>
                                     <span>
                                         {item.quantity}x{item.price}=
