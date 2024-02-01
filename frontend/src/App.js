@@ -15,15 +15,27 @@ import ResetPassword from "./component/user/ResetPassword.js";
 import Cart from "./component/Cart/Cart.js";
 import Shipping from "./component/Cart/Shipping.js";
 import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
-import { useEffect } from 'react';
+import Payment from "./component/Cart/Payment";
+import React, { useEffect, useState } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';
 import { loadUser } from './actions/userAction.js';
 import UserOptions from "./component/layout/header/UserOptions.js"
 import { useSelector } from 'react-redux';
 import ProtectedRoute from "./component/routes/ProtectedRoute";
+import axios from 'axios';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 function App() {
+
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get(`/api/v1/payment/stripeApiKey`);
+
+    setStripeApiKey(data.stripeApiKey);
+  }
   const { isAuthenticated, user } = useSelector((state => state.user));
   useEffect(() => {
     WebFont.load({
@@ -32,8 +44,9 @@ function App() {
       }
     });
 
-
     store.dispatch(loadUser());
+
+    getStripeApiKey();
   }, [])
 
   return (
@@ -56,6 +69,12 @@ function App() {
         <Route exact path='/cart' element={<Cart />} />
         <Route exact path="/login/shipping" element={<ProtectedRoute component={Shipping} />} />
         <Route exact path="/order/confirm" element={<ProtectedRoute component={ConfirmOrder} />} />
+
+        {stripeApiKey && <Route exact path="/process/payment" element={
+          <Elements stripe={loadStripe(stripeApiKey)}>
+            <ProtectedRoute component={Payment} />
+          </Elements>
+        } />}
       </Routes>
       <Footer />
     </>
