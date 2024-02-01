@@ -104,7 +104,6 @@ const Shipping = () => {
                         </div>
                         <div>
                             <BsGlobeAmericas />
-                            {console.log("ffffff", country)}
                             <select
                                 name='country'
                                 value={country}

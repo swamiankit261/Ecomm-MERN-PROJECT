@@ -14,10 +14,10 @@ const orderSchema = new mongoose.Schema({
         country: {
             type: String, required: true,
         },
-        pinCode: {
+        pincode: {
             type: Number, required: true,
         },
-        phoneNo: {
+        phone: {
             type: Number, required: true,
         },
 
@@ -40,7 +40,7 @@ const orderSchema = new mongoose.Schema({
                 type: String,
                 required: true,
             },
-            productRef: {
+            product: {
                 type: mongoose.Schema.ObjectId,
                 ref: "product",
                 required: true,

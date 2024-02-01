@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import "./Payment.css";
 import CheckoutSteps from './CheckoutSteps';
 import Metadata from '../layout/Metadata';
@@ -11,6 +11,7 @@ import { MdEventNote } from "react-icons/md";
 import { MdVpnKey } from "react-icons/md";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { clearErrors, createOrder } from '../../actions/orderActions';
 
 const Payment = () => {
 
@@ -26,11 +27,21 @@ const Payment = () => {
 
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
+    const { error } = useSelector((state) => state.newOrder);
 
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100),
         return_url: 'https://example.com/return_url',
         paymentMethodId: "pm_card_visa"
+    };
+
+    const order = {
+        shippingInfo,
+        orderItems: cartItems,
+        itemsPrice: orderInfo.subtotal,
+        taxPrice: orderInfo.tax,
+        shippingPrice: orderInfo.shippingCharges,
+        totalPrice: orderInfo.totalPrice
     }
 
 
@@ -58,11 +69,12 @@ const Payment = () => {
                     billing_details: {
                         name: user.name,
                         email: user.email,
+                        phone: shippingInfo.phone,
                         address: {
                             line1: shippingInfo.address,
                             city: shippingInfo.city,
                             state: shippingInfo.state,
-                            postal_code: shippingInfo.pinCode,
+                            postal_code: shippingInfo.pincode,
                             country: shippingInfo.country,
                         }
                     }
@@ -75,6 +87,13 @@ const Payment = () => {
                 console.log("result:", result.error.message);
             } else {
                 if (result.paymentIntent.status === "succeeded") {
+                    order.PaymentInfo = {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status,
+                    };
+
+                    dispatch(createOrder(order));
+
                     navigation("/success");
                 } else {
                     payBtn.current.disabled = false;
@@ -87,7 +106,14 @@ const Payment = () => {
             alert.error(error.response.data.message);
             console.log(error.response.data.message);
         }
-    }
+    };
+
+    useEffect(() => {
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
+    }, [error, alert, dispatch]);
     return (
         <>
             <Metadata title={"Payment"} />
