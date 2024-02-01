@@ -13,7 +13,7 @@ const OrderSuccess = () => {
             <div className='orderSuccess'>
                 <FaCheckCircle />
                 <Typography>Your order has been placed successfully</Typography>
-                <Link to={`/order/me`} >View Orders</Link>
+                <Link to={`/orders`} >View Orders</Link>
             </div>
         </>
     )

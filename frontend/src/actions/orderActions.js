@@ -1,4 +1,7 @@
-import { CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL, CLEAR_ERRORS } from "../constants/orderConstants";
+import {
+    CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL, CLEAR_ERRORS,
+    MY_ORDERS_REQUEST, MY_ORDERS_SUCCESS, MY_ORDERS_FAIL
+} from "../constants/orderConstants";
 import axios from "axios";
 
 //create newOrder
@@ -21,8 +24,28 @@ export const createOrder = (order) => async (dispatch) => {
     }
 };
 
-//Clear the error
+//Get my orders
+export const getMyOrders = () => async (dispatch) => {
+    try {
+        dispatch({ type: MY_ORDERS_REQUEST });
 
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        const { data } = await axios.get(`/api/v1/orders/me`, config);
+
+        dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
+
+    } catch (error) {
+        dispatch({ type: MY_ORDERS_FAIL, payload: error.response.data.message });
+    }
+};
+
+
+//Clear the error
 export const clearErrors = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
 };
