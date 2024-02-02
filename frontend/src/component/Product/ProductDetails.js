@@ -83,7 +83,7 @@ const ProductDetails = () => {
                                         <input type="Number" value={quantity} readOnly />
                                         <button onClick={() => QuantityHandler("increase")}>+</button>
                                     </div>
-                                    <button onClick={addToCartHandler}>Add to Cart</button>
+                                    <button disabled={stock < 1 ? true : false} onClick={addToCartHandler}>Add to Cart</button>
                                 </div>
                                 <p>
                                     Status={""}

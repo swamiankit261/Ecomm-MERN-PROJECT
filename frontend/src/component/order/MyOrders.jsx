@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import "./MyOrders.css";
 import Loader from '../layout/Loader/Loader';
 import Metadata from '../layout/Metadata';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { getMyOrders, clearErrors } from '../../actions/orderActions';
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';

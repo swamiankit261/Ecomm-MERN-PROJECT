@@ -18,6 +18,7 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
 import Payment from "./component/Cart/Payment";
 import OrderSuccess from "./component/Cart/OrderSuccess";
 import MyOrders from "./component/order/MyOrders";
+import OrderDetails from "./component/order/OrderDetails";
 import React, { useEffect, useState } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';
@@ -79,6 +80,7 @@ function App() {
         } />}
         <Route exact path="/success" element={<ProtectedRoute component={OrderSuccess} />} />
         <Route exact path="/orders" element={<ProtectedRoute component={MyOrders} />} />
+        <Route exact path="/order/:id" element={<ProtectedRoute component={OrderDetails} />} />
       </Routes>
       <Footer />
     </>
