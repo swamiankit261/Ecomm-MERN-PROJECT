@@ -60,7 +60,7 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
     }
 };
 
-export const newReviewReducer = (state = { review: {} }, action) => {
+export const newReviewReducer = (state = {}, action) => {
     switch (action.type) {
         case NEW_REVIEW_REQUEST:
             return {
@@ -71,12 +71,12 @@ export const newReviewReducer = (state = { review: {} }, action) => {
             return {
                 ...state,
                 loading: false,
-                review: action.payload
+                success: action.payload
             }
         case NEW_REVIEW_RESET:
             return {
                 ...state,
-                review: {}
+                success: false,
             }
         case NEW_REVIEW_FAIL:
             return {

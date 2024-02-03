@@ -103,7 +103,7 @@ exports.createProductReview = catchAsyncError(async (req, res, next) => {
         user: req.user._id,
         name: req.user.name,
         rating: Number(rating),
-        comment
+        comment: comment
     };
 
     const product = await Product.findById(productId);
