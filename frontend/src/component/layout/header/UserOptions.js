@@ -27,7 +27,7 @@ function UserOptions({ user }) {
         navigate("/orders")
     }
     const dashboard = () => {
-        navigate("/dashboard")
+        navigate("/admin/dashboard")
     }
 
     const account = () => {
