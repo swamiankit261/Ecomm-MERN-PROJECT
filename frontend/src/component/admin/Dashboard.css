@@ -1,0 +1,119 @@
+.dashbord {
+    width: 100vw;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.dashbordContainer {
+    border-left: 1px solid rgba(0, 0, 0, 0.13);
+    background-color: rgb(255, 255, 255);
+    padding: 3rem 0;
+}
+
+.dashbordContainer h1 {
+    width: 50%;
+    padding: 1.5rem;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.773);
+    font: 300 2rem "Roboto";
+    margin: auto;
+}
+
+.dashbordSummary {
+    margin: 2rem 0;
+}
+
+.dashbordSummary>div {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+
+.dashbordSummary>div>p {
+    width: 100%;
+    margin: 0 2rem;
+    padding: 1.5rem;
+    text-align: center;
+    background-color: rgba(70, 117, 218, 0.932);
+    font: 300 1.3rem "Roboto";
+    color: white;
+}
+
+.dashbordSummaryBox2>a {
+    width: 10vmax;
+    height: 10vmax;
+    color: rgb(0, 0, 0);
+    font: 300 1.1rem "Roboto";
+    text-align: center;
+    margin: 2rem;
+    padding: 1.5rem;
+    border-radius: 100%;
+    text-decoration: none;
+    background-color: rgba(255, 233, 174);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    transition: all 0.4s ease-in-out;
+}
+
+.dashbordSummaryBox2 a:nth-child(2):hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 2px rgba(236, 215, 157, 0.932));
+}
+
+.dashbordSummaryBox2> :first-child {
+    background-color: tomato;
+    color: rgb(255, 255, 255);
+}
+
+.dashbordSummaryBox2>a:first-child:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px rgb(224, 117, 98));
+}
+
+
+.dashbordSummaryBox2> :last-child {
+    background-color: rgb(51, 51, 51);
+    color: rgb(255, 255, 255);
+}
+
+.dashbordSummaryBox2>a:last-child:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px rgb(51, 51, 51));
+}
+
+.lineChart {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.doughnutChart {
+    width: 30vmax;
+    margin: 0 auto;
+}
+
+@media screen and (max-width:768px) {
+    .dashbord {
+        grid-template-columns: 1fr;
+    }
+
+    .dashbordContainer {
+        border-left: none;
+    }
+
+    .dashbordSummary>div>p {
+        margin: 0;
+    }
+
+    .dashbordSummaryBox2>a {
+        padding: .5rem;
+        margin: 1rem;
+        font: 300 .9rem "Roboto";
+    }
+}

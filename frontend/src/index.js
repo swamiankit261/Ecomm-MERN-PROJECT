@@ -16,15 +16,15 @@ const options = {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <StrictMode>
-      <Provider store={store}>
-        <AlertProvider template={AlertTemplate} {...options}>
+    {/* <StrictMode> */}
+    <Provider store={store}>
+      <AlertProvider template={AlertTemplate} {...options}>
 
-          <App />
+        <App />
 
-        </AlertProvider>
-      </Provider>
-    </StrictMode>
+      </AlertProvider>
+    </Provider>
+    {/* </StrictMode> */}
   </BrowserRouter>
 );
 
