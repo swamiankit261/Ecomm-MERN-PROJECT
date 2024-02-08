@@ -6,54 +6,94 @@ import { Link } from 'react-router-dom';
 import { Doughnut, Line } from 'react-chartjs-2';
 import { Chart, LinearScale, CategoryScale, LineController, PointElement, LineElement, ArcElement } from 'chart.js';
 import Metadata from '../layout/Metadata';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAdminProduct } from '../../actions/productAction';
 
 Chart.register(LinearScale, CategoryScale, LineController, PointElement, LineElement, ArcElement);
 
 
 const Dashboard = () => {
 
+    const dispatch = useDispatch();
+
+    const { loading, products } = useSelector(state => state.products);
+
+
+    let outOfStock = 0;
+    products && products.forEach((product) => {
+        if (product.stock === 0) {
+            outOfStock += 1;
+        }
+    });
+
+    useEffect(() => {
+        dispatch(getAdminProduct())
+    }, [dispatch]);
+
+
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
         datasets: [
             {
                 label: "TOTAL AMOUNT",
-                data: [0, 4000],
+                data: [0, 4000,],
                 backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
+                    "#3083DC",
                     "rgba(54, 162, 235, 0.2)",
                 ],
-                hoverBackgroundColor: ["rgb(197, 72, 49)"],
+                hoverBackgroundColor: ["#3083DC"],
                 borderColor: [
-                    "rgba(255, 99, 132, 1)",
+                    "#3083DC",
                     "rgba(54, 162, 235, 1)",
                 ],
                 borderWidth: 1,
+                hoverOffset: 4,
             }
         ]
     };
 
     const chartOptions = {
         responsive: true,
-        scales: {
-            x: {
-                type: 'category',
-                labels: ["Initial Amount", "Amount Earned"],
+        animations: {
+            tension: {
+                duration: 1000,
+                easing: 'linear',
+                from: 1,
+                to: 0,
+                loop: true
             },
-            y: {
-                beginAtZero: true,
-            },
+        },
+        layout: {
+            padding: {
+                top: 1
+            }
         },
         plugins: {
             legend: {
-                position: 'top', // You can adjust the position as needed (top, bottom, left, right)
+                position: 'bottom',
                 align: "middle",
-                // display: true,
             },
             title: {
                 display: true,
                 text: "TOTAL AMOUNT",
+                position: 'top',
                 fontSize: 20,
                 fontColor: "black",
+            },
+        },
+        scales: {
+            x: {
+                type: 'category',
+                // title: {
+                //     display: true,
+                //     text: "LABELS",
+                //     fontSize: 16,
+                //     fontColor: "black",
+                // },
+            },
+            y: {
+                beginAtZero: true,
+                type: 'linear',
             },
         },
     };
@@ -63,20 +103,78 @@ const Dashboard = () => {
         labels: ["Out of Stock", "In Stock"],
         datasets: [
             {
-                data: [4000, 6000],
+                data: [outOfStock, products.length - outOfStock],
                 backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
+                    "#8AF3FF",
+                    "#D6EFFF",
                 ],
-                hoverBackgroundColor: ["rgb(197, 72, 49)"],
+                hoverBackgroundColor: ["#3083DC"],
                 borderColor: [
-                    "rgba(255, 99, 132, 1)",
-                    "rgba(54, 162, 235, 1)",
+                    "#3083DC",
+                    "#3083DC",
                 ],
                 borderWidth: 1,
             }
-        ]
-    }
+        ],
+        options: {
+            responsive: true,
+            // plugins: {
+            legend: {
+                display: true,
+                // position: 'top',
+                // align: "middle",
+            },
+            // title: {
+            //     display: true,
+            //     text: "TOTAL AMOUNT",
+            //     position: 'top',
+            //     fontSize: 20,
+            //     fontColor: "black",
+            // },
+        },
+        // scales: {
+        //     x: {
+        //         type: 'category',
+        //         // title: {
+        //         //     display: true,
+        //         //     text: "LABELS",
+        //         //     fontSize: 16,
+        //         //     fontColor: "black",
+        //         // },
+        //     },
+        //     y: {
+        //         beginAtZero: true,
+        //         type: 'linear',
+        //     },
+        // },
+        // },
+    };
+
+    const doughnutOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                align: "middle",
+            },
+            // title: {
+            //     display: true,
+            //     text: "Product Stock Status",
+            //     position: 'top',
+            //     fontSize: 20,
+            //     fontColor: "black",
+            // },
+        },
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        }
+    };
 
 
     return (
@@ -95,7 +193,7 @@ const Dashboard = () => {
                         <div className='dashbordSummaryBox2'>
                             <Link to="/admin/products">
                                 <p>Product</p>
-                                <p>50</p>
+                                <p>{products && products.length}</p>
                             </Link>
                             <Link to="/admin/orders">
                                 <p>Orders</p>
@@ -111,7 +209,7 @@ const Dashboard = () => {
                         <Line data={lineState} options={chartOptions} />
                     </div>
                     <div className='doughnutChart'>
-                        <Doughnut data={doughnutState} />
+                        <Doughnut data={doughnutState} options={doughnutOptions} />
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ const Sidebar = () => {
                             <Link to="/admin/products">
                                 <TreeItem nodeId='2' label="All" icon={<MdPostAdd />}></TreeItem>
                             </Link>
-                            <Link to="/admin/products">
+                            <Link to="/admin/product">
                                 <TreeItem nodeId='3' label="Create" icon={<IoMdAdd />}></TreeItem >
                             </Link>
                         </TreeItem>

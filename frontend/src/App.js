@@ -19,8 +19,8 @@ import Payment from "./component/Cart/Payment";
 import OrderSuccess from "./component/Cart/OrderSuccess";
 import MyOrders from "./component/order/MyOrders";
 import OrderDetails from "./component/order/OrderDetails";
-import Dashboard from "./component/admin/Dashboard";
-import ProductList from "./component/admin/ProductList";
+import Dashboard from "./component/Admin/Dashboard";
+import ProductList from "./component/Admin/ProductList";
 import React, { useEffect, useState } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';
@@ -31,6 +31,7 @@ import ProtectedRoute from "./component/routes/ProtectedRoute";
 import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import NewProduct from './component/Admin/NewProduct.jsx';
 
 function App() {
 
@@ -85,6 +86,7 @@ function App() {
         <Route exact path="/order/:id" element={<ProtectedRoute component={OrderDetails} />} />
         <Route exact path="/admin/dashboard" element={<ProtectedRoute isAdmin={true} component={Dashboard} />} />
         <Route exact path="/admin/products" element={<ProtectedRoute isAdmin={true} component={ProductList} />} />
+        <Route exact path="/admin/product" element={<ProtectedRoute isAdmin={true} component={NewProduct} />} />
       </Routes>
       <Footer />
     </>
