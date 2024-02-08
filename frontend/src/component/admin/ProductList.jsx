@@ -1,30 +1,46 @@
 import React, { useEffect } from 'react';
 import "./ProductList.css";
-import { getAdminProduct, clearError } from '../../actions/productAction';
+import { getAdminProduct, clearError, deleteProduct } from '../../actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAlert } from 'react-alert';
 import Metadata from '../layout/Metadata';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Sidebar from './Sidebar';
 import { DataGrid } from '@mui/x-data-grid';
 import { MdDelete } from 'react-icons/md';
 import { FiEdit3 } from 'react-icons/fi';
+import { DELETE_PRODUCT_RESET } from '../../constants/productConstants';
 // import Sidebar from './Sidebar';
 
 const ProductList = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
+    const navigate = useNavigate();
 
-    const { loading, error, products } = useSelector(state => state.products);
+    const { error, products } = useSelector(state => state.products);
+    const { error: deleteError, isDeleted } = useSelector(state => state.product);
+
+    const deleteProductHandler = (id) => {
+        dispatch(deleteProduct(id));
+    };
 
     useEffect(() => {
         if (error) {
             alert.error(error);
             dispatch(clearError())
         }
+        if (deleteError) {
+            alert.error(deleteError);
+            dispatch(clearError())
+        }
+        if (isDeleted) {
+            alert.success("Product deleted successfully");
+            navigate("/admin/dashboard");
+            dispatch({ type: DELETE_PRODUCT_RESET });
+        }
         dispatch(getAdminProduct())
-    }, [error, alert, dispatch]);
+    }, [error, alert, dispatch, deleteError, isDeleted, navigate]);
 
     const columns = [
         { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -38,7 +54,7 @@ const ProductList = () => {
                     <Link to={`/admin/product/${params.row.id}`} >
                         <FiEdit3 />
                     </Link>
-                    <Button><MdDelete /></Button>
+                    <Button onClick={() => deleteProductHandler(params.row.id)}><MdDelete /></Button>
                 </strong>
             ),
         },
@@ -54,7 +70,7 @@ const ProductList = () => {
                 <Sidebar />
                 <div className='productListContainer'>
                     <h1 id='productListHeading'>ALL PRODUCTS</h1>
-                    <DataGrid className='productListTable' rows={rows} columns={columns} autoPageSize={10} />
+                    <DataGrid className='productListTable' rows={rows} columns={columns} autoPageSize={true} />
                 </div>
             </div>
         </>

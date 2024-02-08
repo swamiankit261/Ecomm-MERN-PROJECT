@@ -6,12 +6,10 @@ import Metadata from '../layout/Metadata';
 import Sidebar from './Sidebar';
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants';
 import { createProduct, clearError } from '../../actions/productAction';
-import { BiCheckDouble, BiMoney, BiMoneyWithdraw } from 'react-icons/bi';
-import { MdAccountTree, MdAttachMoney, MdDescription, MdMoney, MdOutlineMoney, MdOutlineMoneyOff, MdOutlineSpellcheck, MdStorage } from 'react-icons/md';
+import { MdAccountTree, MdAttachMoney, MdDescription, MdOutlineSpellcheck, MdStorage } from 'react-icons/md';
 import { Button } from '@mui/material';
 import { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { FaMoneyCheck } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const NewProduct = () => {
     const dispatch = useDispatch();
@@ -81,7 +79,7 @@ const NewProduct = () => {
             navigate("/admin/dashboard");
             dispatch({ type: NEW_PRODUCT_RESET });
         }
-    }, [error, dispatch, alert, success]);
+    }, [error, dispatch, alert, success, navigate]);
 
     return (
         <>

@@ -113,10 +113,22 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
 
     const productId = req.params.id;
 
-    const result = await Product.deleteOne({ _id: productId });
+    const product = await Product.findById(productId);
+
+    if (!product) {
+        return next(new ErrorHandler("product not found", 404));
+    }
+
+    //Delete product images from cloudinary server storage
+    for (let i = 0; i < product.images.length; i++) {
+        await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+    };
+
+    // await product.remove();
+    const result = await Product.findByIdAndDelete(productId);
 
     if (result.deletedCount === 0) {
-        return next(new ErrorHandler("product not found", 404));
+        return next(new ErrorHandler("product not delete", 404));
     }
 
     res.status(200).json({

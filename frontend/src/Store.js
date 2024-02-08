@@ -1,14 +1,14 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer } from "./reducers/productReducers";
+import { deleteProductReducer, newProductReducer, newReviewReducer, productDetailsReducer, productsReducer } from "./reducers/productReducers";
 import { userReducer } from "./reducers/userReducers";
 import { forgotPasswordReducer, updateProfileReducer } from "./reducers/updateProfile";
 import { addToCart } from "./reducers/cartReducers";
 import { myOrdersReducer, newOrderRequest, orderDetailsReducer } from "./reducers/orderReducers";
 
 const reducer = combineReducers({
-    products: productReducer,
+    products: productsReducer,
     productDetails: productDetailsReducer,
     user: userReducer,
     profile: updateProfileReducer,
@@ -19,6 +19,7 @@ const reducer = combineReducers({
     orderDetails: orderDetailsReducer,
     newReview: newReviewReducer,
     newProduct: newProductReducer,
+    product: deleteProductReducer
 });
 
 let initialState = {
