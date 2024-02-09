@@ -23,6 +23,8 @@ import Dashboard from "./component/Admin/Dashboard";
 import ProductList from "./component/Admin/ProductList";
 import NewProduct from './component/Admin/NewProduct';
 import UpdateProduct from "./component/Admin/UpdateProduct";
+import OrdersList from "./component/Admin/OrdersList";
+import ProcessOrder from "./component/Admin/ProcessOrder";
 import React, { useEffect, useState } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';
@@ -89,6 +91,8 @@ function App() {
         <Route exact path="/admin/products" element={<ProtectedRoute isAdmin={true} component={ProductList} />} />
         <Route exact path="/admin/product" element={<ProtectedRoute isAdmin={true} component={NewProduct} />} />
         <Route exact path="/admin/product/:id" element={<ProtectedRoute isAdmin={true} component={UpdateProduct} />} />
+        <Route exact path="/admin/orders" element={<ProtectedRoute isAdmin={true} component={OrdersList} />} />
+        <Route exact path="/admin/order/:id" element={<ProtectedRoute isAdmin={true} component={ProcessOrder} />} />
       </Routes>
       <Footer />
     </>
