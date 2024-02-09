@@ -20,8 +20,9 @@ const categories = [
     "Tops",
     "Attire",
     "Camera",
+    "Books",
     "Smartphones",
-]
+];
 
 const Products = () => {
     const dispatch = useDispatch();

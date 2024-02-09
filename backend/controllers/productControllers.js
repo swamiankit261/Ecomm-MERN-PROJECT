@@ -92,18 +92,48 @@ exports.getSingleProduect = catchAsyncError(async (req, res, next) => {
 // Update product-- Admin
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
 
-    let products = await Product.findById(req.params.id);
+    let product = await Product.findById(req.params.id);
 
-    if (!products) {
+    if (!product) {
         return next(new ErrorHandler("product not found", 404));
     }
-    products = await Product.findByIdAndUpdate(req.params.id, req.body, {
+
+    //Images are stored in the cloudinary database in order of appearance in the product list
+
+    let images = [];
+
+    if (typeof req.body.images === "string") {
+        images.push(req.body.images);
+    } else {
+        images = req.body.images;
+    };
+
+    if (images !== undefined) {
+        // delete images from cloudinary
+        for (let i = 0; i < product.images.length; i++) {
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+        };
+
+        const imagesLinks = [];
+
+        for (let i = 0; i < images.length; i++) {
+            const image = await cloudinary.v2.uploader.upload(images[i], { folder: "products" });
+            imagesLinks.push({
+                public_id: image.public_id,
+                url: image.secure_url,
+            });
+        };
+        req.body.images = imagesLinks;
+    }
+
+
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true, runValidators: true, useFindAndModify: false
     });
 
     res.status(200).json({
         success: true,
-        products
+        product
     })
 
 });
