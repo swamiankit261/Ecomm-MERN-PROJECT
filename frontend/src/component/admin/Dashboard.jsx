@@ -103,7 +103,7 @@ const Dashboard = () => {
         labels: ["Out of Stock", "In Stock"],
         datasets: [
             {
-                data: [outOfStock, products.length - outOfStock],
+                data: [outOfStock, products?.length - outOfStock],
                 backgroundColor: [
                     "#8AF3FF",
                     "#D6EFFF",

@@ -47,7 +47,7 @@ const OrdersList = () => {
         {
             field: 'status', headerName: 'Status',
             minWidth: 150, flex: .5,
-            cellClassName: (params) => (params.row.status === "delivered" ? "greenColor" : "redColor"),
+            cellClassName: (params) => (params.row.status === "Delivered" ? "greenColor" : "redColor"),
         },
         { field: 'itemsQty', headerName: 'ItemsQty', type: "number", minWidth: 150, flex: .3 },
         { field: 'amount', headerName: 'Amount', type: "number", minWidth: 150, flex: .5 },

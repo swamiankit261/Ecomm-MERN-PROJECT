@@ -66,7 +66,7 @@ const OrderDetails = () => {
                         <Typography>Order Status</Typography>
                         <div className='orderDetailsContainerBox'>
                             <div>
-                                <p className={order.orderStatus && order.orderStatus === "delivered" ? "greenColor" : "redColor"}>
+                                <p className={order.orderStatus && order.orderStatus === "Delivered" ? "greenColor" : "redColor"}>
                                     {order.orderStatus && order.orderStatus}
                                 </p>
                             </div>
