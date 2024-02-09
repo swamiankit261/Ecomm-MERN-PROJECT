@@ -58,7 +58,7 @@ const ProcessOrder = () => {
                 <Sidebar />
                 <div className='newProductContainer'>
                     {loading ? <Loader /> : <>
-                        <div className='confirmOrderContainer'>
+                        <div className='confirmOrderContainer' style={{ display: order.orderStatus === "Delivered" ? "block" : "grid" }}>
                             <div>
                                 <div className='confirmShippingArea'>
                                     <Typography>Shipping Info</Typography>
@@ -138,7 +138,7 @@ const ProcessOrder = () => {
                                     </div>
                                 </div> */}
                             </div>
-                            <div>
+                            <div style={{ display: order.orderStatus === "Delivered" ? "none" : "block" }}>
                                 <form className='updateOrderForm' encType='multipart/form-data' onSubmit={updateOrderSubmitHandler}>
                                     <h1>Process Order</h1>
 

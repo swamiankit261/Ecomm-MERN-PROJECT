@@ -9,7 +9,7 @@ import Sidebar from './Sidebar';
 import { DataGrid } from '@mui/x-data-grid';
 import { MdDelete } from 'react-icons/md';
 import { FiEdit3 } from 'react-icons/fi';
-import { deleteOrder, getAllOrders, clearErrors } from '../../actions/orderActions';
+import { deleteOrder, getallOrders, clearErrors } from '../../actions/orderActions';
 import { DELETE_ORDER_RESET } from '../../constants/orderConstants';
 // import Sidebar from './Sidebar';
 
@@ -39,7 +39,7 @@ const OrdersList = () => {
             navigate("/admin/orders");
             dispatch({ type: DELETE_ORDER_RESET });
         }
-        dispatch(getAllOrders())
+        dispatch(getallOrders())
     }, [error, alert, dispatch, deleteError, isDeleted, navigate]);
 
     const columns = [

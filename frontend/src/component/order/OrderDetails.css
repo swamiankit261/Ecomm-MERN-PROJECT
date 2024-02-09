@@ -71,7 +71,9 @@
 }
 
 .orderDetailsCartItemsContainer>div>span {
+    width: 9vmax;
     font: 100 1vmax "Roboto";
+    display: flex;
     color: #5e5e5e;
 }
 

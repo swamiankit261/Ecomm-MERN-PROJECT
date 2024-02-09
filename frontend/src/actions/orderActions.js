@@ -46,7 +46,7 @@ export const getMyOrders = () => async (dispatch) => {
 };
 
 // Get all orders (only admins can access)
-export const getAllOrders = () => async (dispatch) => {
+export const getallOrders = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ORDERS_REQUEST });
 
