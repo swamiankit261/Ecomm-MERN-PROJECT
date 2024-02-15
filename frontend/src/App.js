@@ -26,7 +26,7 @@ import UpdateProduct from "./component/Admin/UpdateProduct";
 import OrdersList from "./component/Admin/OrdersList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList from "./component/Admin/UsersList";
-import UpdateUser from "./component/Admin/UpdateUser.jsx";
+import UpdateUser from "./component/Admin/UpdateUser";
 import React, { useEffect, useState } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';

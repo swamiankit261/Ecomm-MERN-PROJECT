@@ -252,21 +252,23 @@ exports.upDateUserRole = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler(`${JSON.stringify(result.array())}`), 400);
     }
 
+    let user = await User.findById(req.params.id);
+
+    if (!user) {
+        return next(new ErrorHandler(`user note found`, 404));
+    }
     const newUserData = {
-        // name: result.name,
-        // email: req.body.email,
+        name: req.body.name,
+        email: req.body.email,
         role: req.body.role,
     };
 
-    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    user = await User.findByIdAndUpdate(req.params.id, newUserData, {
         new: true,
         runValidators: true,
         useFindAndModify: false,
     });
 
-    if (!user) {
-        return next(new ErrorHandler(`user note found`, 404));
-    }
 
 
     res.status(200).json({

@@ -3,7 +3,7 @@ const { registerUser, loginUser, logout, forgotPassword,
     resetPassword, getUserDetails, updatePassword, updateUserProfile,
     getAllUsers, getSingleUser, upDateUserRole, deleteUser } = require("../controllers/userControllers");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
-const { body, validationResult } = require("express-validator");
+const { body } = require("express-validator");
 const R = express.Router();
 
 const upDateUserRoleValidation = [
