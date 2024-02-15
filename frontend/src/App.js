@@ -25,6 +25,8 @@ import NewProduct from './component/Admin/NewProduct';
 import UpdateProduct from "./component/Admin/UpdateProduct";
 import OrdersList from "./component/Admin/OrdersList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
+import UsersList from "./component/Admin/UsersList";
+import UpdateUser from "./component/Admin/UpdateUser.jsx";
 import React, { useEffect, useState } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';
@@ -89,10 +91,13 @@ function App() {
         <Route exact path="/order/:id" element={<ProtectedRoute component={OrderDetails} />} />
         <Route exact path="/admin/dashboard" element={<ProtectedRoute isAdmin={true} component={Dashboard} />} />
         <Route exact path="/admin/products" element={<ProtectedRoute isAdmin={true} component={ProductList} />} />
+        <Route exact path="/admin/products" element={<ProtectedRoute isAdmin={true} component={ProductList} />} />
         <Route exact path="/admin/product" element={<ProtectedRoute isAdmin={true} component={NewProduct} />} />
         <Route exact path="/admin/product/:id" element={<ProtectedRoute isAdmin={true} component={UpdateProduct} />} />
         <Route exact path="/admin/orders" element={<ProtectedRoute isAdmin={true} component={OrdersList} />} />
         <Route exact path="/admin/order/:id" element={<ProtectedRoute isAdmin={true} component={ProcessOrder} />} />
+        <Route exact path="/admin/users" element={<ProtectedRoute isAdmin={true} component={UsersList} />} />
+        <Route exact path="/admin/user/:id" element={<ProtectedRoute isAdmin={true} component={UpdateUser} />} />
       </Routes>
       <Footer />
     </>

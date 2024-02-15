@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import "./Dashboard.css";
 import Sidebar from "./Sidebar";
 import { Typography } from '@mui/material';
@@ -9,6 +9,7 @@ import Metadata from '../layout/Metadata';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminProduct } from '../../actions/productAction';
 import { getallOrders } from '../../actions/orderActions';
+import { getAllUsers } from '../../actions/userAction';
 Chart.register(LinearScale, CategoryScale, LineController, PointElement, LineElement, ArcElement);
 
 
@@ -18,6 +19,7 @@ const Dashboard = () => {
 
     const { loading, products } = useSelector(state => state.products);
     const { orders } = useSelector(state => state.allOrders);
+    const { users } = useSelector(state => state.allUsers);
 
 
     let outOfStock = 0;
@@ -30,6 +32,7 @@ const Dashboard = () => {
     useEffect(() => {
         dispatch(getAdminProduct());
         dispatch(getallOrders());
+        dispatch(getAllUsers());
     }, [dispatch]);
 
 
@@ -203,7 +206,7 @@ const Dashboard = () => {
                             </Link>
                             <Link to="/admin/users">
                                 <p>Users</p>
-                                <p>20</p>
+                                <p>{users && users.length}</p>
                             </Link>
                         </div>
                     </div>
