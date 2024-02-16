@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import "./ProductReviews.css";
-import { getAdminProduct, clearError, deleteProduct, getAllReviews, deleteReview } from '../../actions/productAction';
+import { clearError, getAllReviews, deleteReview } from '../../actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAlert } from 'react-alert';
 import Metadata from '../layout/Metadata';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Sidebar from './Sidebar';
 import { DataGrid } from '@mui/x-data-grid';
 import { MdDelete } from 'react-icons/md';
-import { FiEdit3 } from 'react-icons/fi';
 import { DELETE_REVIEW_RESET } from '../../constants/productConstants';
 import { BiStar } from 'react-icons/bi';
-// import Sidebar from './Sidebar';
 
 const ProductReviews = () => {
     const dispatch = useDispatch();
@@ -23,7 +21,7 @@ const ProductReviews = () => {
     const { error, reviews, loading } = useSelector(state => state.productReviews);
 
     const [productId, setProductId] = useState("");
-    
+
     const deleteReviewsHandler = (reviewId) => {
         dispatch(deleteReview(reviewId, productId));
     };
