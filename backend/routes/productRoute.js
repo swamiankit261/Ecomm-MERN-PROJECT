@@ -1,8 +1,13 @@
 const express = require("express");
 const { getAllProducts, createProduct, updateProduct, deleteProduct, getSingleProduect, createProductReview, getProductReviews, deleteReview, getAdminProducts } = require("../controllers/productControllers");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
+const { body } = require("express-validator");
 
 const router = express.Router();
+
+const isValidId = [
+    body("id", "please enter the valid Id!").matches(/^[0-9a-fA-F]{24}$/)
+];
 
 router.route("/products").get(getAllProducts);
 

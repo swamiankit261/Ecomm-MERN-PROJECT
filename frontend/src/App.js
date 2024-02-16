@@ -27,6 +27,7 @@ import OrdersList from "./component/Admin/OrdersList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList from "./component/Admin/UsersList";
 import UpdateUser from "./component/Admin/UpdateUser";
+import ProductReviews from "./component/Admin/ProductReviews";
 import React, { useEffect, useState } from 'react';
 import LoginSignUpPage from './component/user/LoginSignUpPage.js';
 import store from './Store.js';
@@ -98,6 +99,7 @@ function App() {
         <Route exact path="/admin/order/:id" element={<ProtectedRoute isAdmin={true} component={ProcessOrder} />} />
         <Route exact path="/admin/users" element={<ProtectedRoute isAdmin={true} component={UsersList} />} />
         <Route exact path="/admin/user/:id" element={<ProtectedRoute isAdmin={true} component={UpdateUser} />} />
+        <Route exact path="/admin/reviews" element={<ProtectedRoute isAdmin={true} component={ProductReviews} />} />
       </Routes>
       <Footer />
     </>
