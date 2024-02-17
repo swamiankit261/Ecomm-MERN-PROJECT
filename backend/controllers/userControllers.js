@@ -36,6 +36,14 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         },
     });
 
+    const message = `Dear ${user.name},\n welcome to the Ecommerce Website family! We hope you find everything you need and more.\n\nHappy shopping!\n\nBest regards,\n\nThe Ecommerce Website Team.`
+
+    sendEmail({
+        email: user.email,
+        subject: `Welcome to [My Ecommerce Website]!`,
+        message
+    });
+
     sendToken(user, 201, res);
 });
 
@@ -90,7 +98,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     // Get ResetPassword token
 
     const resetToken = user.getResetPaswordToken();
-    console.log(resetToken);
+
     await user.save({ validateBeforeSave: false });
 
     // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
