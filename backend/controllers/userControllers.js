@@ -183,15 +183,18 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 });
 
 // Update User Profile
-exports.updateUserProfile = catchAsyncError(async (req, res, next) => {
+exports.updateUserProfile = async (req, res, next) => {
 
-    const newUserData = {
-        name: req.body.name,
-        email: req.body.email,
-    };
+    let user = await User.findById(req.user._id);
+
+    if (!user) {
+        return next(new ErrorHandler("user not found", 404));
+    }
+
+    user.name = req.body.name;
+    user.email = req.body.email;
 
     if (req.body.avatar !== "") {
-        const user = await User.findById(req.user._id);
 
         const imageId = user.avatar.public_id;
 
@@ -199,25 +202,19 @@ exports.updateUserProfile = catchAsyncError(async (req, res, next) => {
 
         const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, { folder: "Avatars", width: 200, CropMode: "scale" });
 
-        newUserData.avatar = {
+        user.avatar = {
             public_id: myCloud.public_id,
             url: myCloud.secure_url,
         };
 
-    }
+    };
 
-
-    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false,
-    });
-
+    await user.save({ validateBeforeSave: false });
 
     res.status(200).json({
         success: true
     });
-});
+};
 
 
 // Get All Users (Admin)

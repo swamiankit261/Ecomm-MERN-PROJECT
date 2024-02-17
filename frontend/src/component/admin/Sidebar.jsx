@@ -9,13 +9,14 @@ import { MdDashboard, MdPostAdd, MdRateReview } from 'react-icons/md';
 import { BsPeople } from 'react-icons/bs';
 import { IoMdAdd } from 'react-icons/io';
 import ListAlt from '@mui/icons-material/ListAlt';
+import image from "../../images/adminImage.jpg";
 
 const Sidebar = () => {
     return (
         <>
             <div className='sidebar'>
                 <Link to="/">
-                    <img src="https://i.ibb.co/z4z4z4z/logo.png" alt="logo" />
+                    <img src={image} alt="logo" />
                 </Link>
                 <Link to="/admin/dashboard">
                     <MdDashboard /> Dashboard

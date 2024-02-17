@@ -19,12 +19,18 @@
     /* border: 2px solid white; */
 }
 
+.css-ohwg9z {
+    width: 65%;
+    margin: auto;
+}
+
 .ProductDetails>div:last-child {
     align-items: flex-start;
 }
 
 .carouselImage {
     width: 20vmax;
+    height: 22vmax;
 }
 
 .detailsBlock-1>h2 {

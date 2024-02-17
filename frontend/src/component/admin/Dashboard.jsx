@@ -96,7 +96,7 @@ const Dashboard = () => {
                 type: 'category',
                 // title: {
                 //     display: true,
-                //     text: "LABELS",
+                //     text: "TOTAL AMOUNT",
                 //     fontSize: 16,
                 //     fontColor: "black",
                 // },

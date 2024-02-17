@@ -1,5 +1,9 @@
 .banner {
-    background-image: linear-gradient(to right, #365dc0, #3027ae);
+    /* background-image: linear-gradient(to right, #365dc0, #3027ae); */
+    background-image: url("../../images/peakpx.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 100vmin;
     display: flex;
     flex-direction: column;
@@ -21,7 +25,8 @@
 .banner>a>button {
     margin-bottom: 5vmax;
     cursor: pointer;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
     border: 1px solid white;
     border-radius: 0;
     padding: 1vmax;
@@ -31,8 +36,8 @@
 }
 
 .banner>a>button:hover {
-    background-color: rgba(255, 255, 255, 0);
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .banner::after {
@@ -56,6 +61,11 @@
     padding: 1vmax;
     margin: 5vmax auto;
     color: rgb(28, 27, 27);
+}
+
+.maincontainer {
+
+    background-color: rgb(250, 247, 247);
 }
 
 .container {

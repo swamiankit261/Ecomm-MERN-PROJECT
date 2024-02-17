@@ -32,12 +32,12 @@ const Home = () => {
                         <button>scroll <PiMouseSimpleFill /></button>
                     </a>
                 </div>
-
-                <h2 className='homeHeading'>Featured Products</h2>
-                <div className='container' id='container'>
-                    {products && products.map((product, index) => <ProductCard key={index} product={product} />)}
+                <div className='maincontainer'>
+                    <h2 className='homeHeading'>Featured Products</h2>
+                    <div className='container' id='container'>
+                        {products && products.map((product, index) => <ProductCard key={index} product={product} />)}
+                    </div>
                 </div>
-
             </>)}
         </>
     )

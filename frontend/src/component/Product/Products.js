@@ -21,7 +21,20 @@ const categories = [
     "Attire",
     "Camera",
     "Books",
+    "Watches",
     "Smartphones",
+    "Accessories",
+    "Home Decor",
+    "Electronics",
+    "Fitness Equipment",
+    "Kitchen Appliances",
+    "Toys and Games",
+    "Jewelry",
+    "Sports Gear",
+    "Beauty Products",
+    "Stationery",
+    "Music Instruments",
+    "Outdoor Gear"
 ];
 
 const Products = () => {
