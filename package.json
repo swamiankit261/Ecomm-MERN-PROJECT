@@ -1,9 +1,12 @@
 {
+  "homepage": "https://swamiankit261.github.io/Ecomm-MERN-PROJECT",
   "name": "ecommerce",
   "version": "1.0.0",
   "description": "",
   "main": "backend/server.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "nodemon backend/server.js",
     "frontend": "cd ./frontend && npm start",
@@ -26,5 +29,8 @@
     "nodemailer": "^6.9.7",
     "stripe": "^14.14.0",
     "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
   }
 }
