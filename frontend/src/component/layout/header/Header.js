@@ -21,7 +21,7 @@ const NavbarComponent = () => {
         <div>
             <div className="navbar">
                 <div className={`nav-item ${isAnimated ? 'animateF1' : `${isAnimated2 ? "animate_up1" : ""}`}`} id="nav_1">
-                    <Link className="nav-child1" to={"/"} onClick={startAnimation}><MdLocalGroceryStore fontSize={30} /></Link>
+                    <Link className="nav-child1" to={"/cart"} onClick={startAnimation}><MdLocalGroceryStore fontSize={30} /></Link>
                     <div className="hamb" onClick={startAnimation}>
                         <span className={`ham_1 ${isAnimated ? 'ham_1' : ''}`}>|</span>
                         <span className={`ham_2 ${isAnimated ? 'ham_2' : ''}`}>|</span>

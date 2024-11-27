@@ -19,7 +19,7 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
     if (existEmail) {
         return next(new ErrorHandler("You can't use invalid or duplicate emails.", 409))
     }
-    const myCloud = await cloudinary.v2.uploader.upload(avatar, { folder: "Avatars", width: 200, CropMode: "scale" });
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, { folder: "Avatars", width: 200, CropMode: "scale" },function (error, result) { console.log(error); });
 
     // const myCloud = await cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
     //     { folder: "Avatars" },
@@ -36,7 +36,7 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         },
     });
 
-    const message = `Dear ${user.name},\n welcome to the Ecommerce Website family! We hope you find everything you need and more.\n\nHappy shopping!\n\nBest regards,\n\nThe Ecommerce Website Team.`
+    const message = `Dear ${user.name},\n welcome to the Ecommerce Website family! We hope you find everything you need and more.\n\nHappy shopping!\n\nBest regards,\nThe Ecommerce Website Team.`
 
     sendEmail({
         email: user.email,

@@ -31,12 +31,11 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
 
 // Get single Order
 exports.getSingleOrder = catchAsyncError(async (req, res, next) => {
-    const order = await Order.findById(req.params.id).populate("userRef", "name email");
+    const order = await Order.findById(req.params.id).populate("userRef");
 
     if (!order) {
         return next(new ErrorHandler("Order not found with Id", 404));
     }
-
     res.status(200).json({
         success: true,
         order
